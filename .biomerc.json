@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/biomejs/biome/main/schema.json",
+  "files": ["src/**/*.astro", "src/**/*.css"],
+  "formatter": {
+    "lineWidth": 120,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "linter": {
+    "rules": {
+      "recommended": true
+    }
+  },
+  "organizer": {
+    "groups": {
+      "builtin": ["builtin"],
+      "external": ["external"],
+      "internal": ["internal"]
+    }
+  }
+}

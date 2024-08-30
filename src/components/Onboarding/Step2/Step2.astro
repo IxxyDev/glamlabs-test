@@ -1,0 +1,17 @@
+---
+import './Onboarding.module.css';
+
+export interface Step2Props {
+	onNext: () => void;
+	onPrev: () => void;
+}
+---
+
+<div class="onboarding-step">
+	<h2>Step 2: More Info</h2>
+	<p>This step could ask for additional user information.</p>
+	<div class="onboarding-buttons">
+		<button onClick={onPrev}>Back</button>
+		<button onClick={onNext}>Next</button>
+	</div>
+</div>

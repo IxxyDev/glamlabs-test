@@ -1,0 +1,51 @@
+.hero {
+	position: relative;
+}
+
+.landing-video {
+	width: 100%;
+	height: auto;
+	border-radius: 20px;
+}
+
+.cta {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	text-align: center;
+}
+
+.get-started {
+	background-color: #FF4F4F;
+	color: white;
+	border: none;
+	padding: 15px 30px;
+	font-size: 1.2em;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.get-started:hover {
+	background-color: #FF3333;
+}
+
+.content {
+	padding: 40px 20px;
+	background-color: #f9f9f9;
+	text-align: left;
+}
+
+.content h2 {
+	margin-top: 40px;
+	font-size: 1.8em;
+	color: #333;
+}
+
+.content p,
+.content ul {
+	font-size: 1em;
+	line-height: 1.6;
+	color: #666;
+}
