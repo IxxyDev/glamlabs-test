@@ -1,0 +1,32 @@
+.hero {
+	position: relative;
+}
+
+.landing-video {
+	width: 100%;
+	height: auto;
+	border-radius: 20px;
+}
+
+.cta {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	text-align: center;
+}
+
+.get-started {
+	background-color: #FF4F4F;
+	color: white;
+	border: none;
+	padding: 15px 30px;
+	font-size: 1.2em;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.get-started:hover {
+	background-color: #FF3333;
+}

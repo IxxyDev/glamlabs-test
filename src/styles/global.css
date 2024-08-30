@@ -1,3 +1,4 @@
+/* Global styles */
 * {
 	margin: 0;
 	padding: 0;
@@ -39,11 +40,9 @@ ol {
 	padding-left: 20px;
 }
 
-img {
+img, video {
 	max-width: 100%;
 	height: auto;
-	display: block;
-	margin: 0 auto;
 }
 
 button {
@@ -61,12 +60,14 @@ button:hover {
 	background-color: #0056b3;
 }
 
+/* Container */
 .container {
 	width: 90%;
 	max-width: 1200px;
 	margin: 0 auto;
 }
 
+/* Responsive typography */
 @media (max-width: 768px) {
 	body {
 		font-size: 90%;
@@ -78,5 +79,33 @@ button:hover {
 
 	h2 {
 		font-size: 1.75em;
+	}
+
+	.navbar {
+		flex-direction: column;
+	}
+
+	.nav-links {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.cta {
+		padding: 20px;
+	}
+
+	.onboarding-step {
+		padding: 10px;
+	}
+}
+
+@media (max-width: 480px) {
+	.header, .footer {
+		padding: 10px;
+	}
+
+	button {
+		width: 100%;
+		padding: 15px;
 	}
 }
