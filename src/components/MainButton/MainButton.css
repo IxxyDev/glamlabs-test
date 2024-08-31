@@ -1,0 +1,23 @@
+.main-button {
+	width: 100%;
+	max-width: 200px;
+	height: 55px;
+	background-color: #007BFF;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-size: 1.5rem;
+}
+
+.main-button:hover {
+	background-color: #0056b3;
+	transform: scale(1.05);
+}
+
+.main-button:disabled {
+	background-color: #cccccc;
+	cursor: not-allowed;
+}

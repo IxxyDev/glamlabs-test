@@ -1,22 +1,25 @@
-import "./Onboarding.module.css";
+import "../Onboarding.css";
+import Form from "../../Form/Form.tsx";
 
 export interface Step1Props {
 	onNext: () => void;
+	onFormDataChange: (data: Record<string, string>) => void;
 }
 
-const Step1 = ({ onNext }: Step1Props) => {
+const Step1 = ({ onNext, onFormDataChange }: Step1Props) => {
+	const fields = [
+		{ name: "email", type: "email", label: "Email:", required: true },
+	];
+
+	const handleSubmit = (data: Record<string, string>) => {
+		onFormDataChange(data);
+		onNext();
+	};
+
 	return (
 		<div className="onboarding-step">
 			<h2>Step 1: Login with Email</h2>
-			<form
-				onSubmit={(event) => {
-					event.preventDefault();
-					onNext();
-				}}
-			>
-				<input type="email" placeholder="Enter your email" required />
-				<button type="submit">Next</button>
-			</form>
+			<Form fields={fields} onSubmit={handleSubmit} />
 		</div>
 	);
 };

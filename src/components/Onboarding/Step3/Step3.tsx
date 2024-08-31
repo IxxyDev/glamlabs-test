@@ -1,22 +1,33 @@
-import "./Onboarding.module.css";
+import Form from "../../Form/Form.tsx";
 
-export interface Step3Props {
+interface Step3Props {
 	onPrev: () => void;
+	onNext: () => void;
+	onFormDataChange: (data: Record<string, string>) => void;
 }
 
-const Step3 = ({ onPrev }: Step3Props) => {
+const Step3 = ({ onPrev, onNext, onFormDataChange }: Step3Props) => {
+	const fields = [
+		{ name: "cardNumber", type: "text", label: "Card Number:", required: true },
+		{
+			name: "expiryDate",
+			type: "text",
+			label: "Expiry Date:",
+			placeholder: "MM/YY",
+			required: true,
+		},
+		{ name: "cvv", type: "text", label: "CVV:", required: true },
+	];
+
+	const handleSubmit = (data: Record<string, string>) => {
+		onFormDataChange(data);
+		onNext();
+	};
+
 	return (
 		<div className="onboarding-step">
-			<h2>Step 3: Confirmation</h2>
-			<p>You're all set! Click Finish to complete your onboarding.</p>
-			<div className="onboarding-buttons">
-				<button onClick={onPrev} type="button">
-					Back
-				</button>
-				<button onClick={() => alert("Onboarding Complete!")} type="button">
-					Finish
-				</button>
-			</div>
+			<h2>Step 3: Payment Information</h2>
+			<Form fields={fields} onSubmit={handleSubmit} onPrev={onPrev} />
 		</div>
 	);
 };
