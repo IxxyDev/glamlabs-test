@@ -1,14 +1,11 @@
+const generateId = () => {
+	const arr = Array.from({ length: 10 }).map((_, i) => Math.random() * i);
+	return arr.join("");
+};
+
 export const mockAuthService = {
-	signUp: async (email: string, password: string) => {
-		console.log(
-			`User signed up with email: ${email} and password: ${password}`,
-		);
-		return { userId: "12345", email };
-	},
-	signIn: async (email: string, password: string) => {
-		console.log(
-			`User signed in with email: ${email} and password: ${password}`,
-		);
-		return { userId: "12345", email };
+	signUp: async (email: string, id: string) => {
+		console.log(`User signed up with email: ${email} and password: ${id}`);
+		return { userId: generateId(), email };
 	},
 };

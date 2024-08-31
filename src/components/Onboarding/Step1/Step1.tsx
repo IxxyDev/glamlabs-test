@@ -4,11 +4,18 @@ import Form from "../../Form/Form.tsx";
 export interface Step1Props {
 	onNext: () => void;
 	onFormDataChange: (data: Record<string, string>) => void;
+	formData: Record<string, string>;
 }
 
-const Step1 = ({ onNext, onFormDataChange }: Step1Props) => {
+const Step1 = ({ onNext, onFormDataChange, formData }: Step1Props) => {
 	const fields = [
-		{ name: "email", type: "email", label: "Email:", required: true },
+		{
+			name: "email",
+			type: "email",
+			label: "Email:",
+			required: true,
+			value: formData.email,
+		},
 	];
 
 	const handleSubmit = (data: Record<string, string>) => {

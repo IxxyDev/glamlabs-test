@@ -1,6 +1,7 @@
 import { useState } from "react";
-import "./Hero.css";
 import MainButton from "../MainButton/MainButton.tsx";
+
+import "./Hero.css";
 
 const videos = [
 	"https://cdn.getglam.app/content/paywalls/240515_web2web_video1_v04.mp4",

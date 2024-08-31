@@ -8,6 +8,7 @@ interface FormField {
 	name: string;
 	type: string;
 	label: string;
+	value: string;
 	placeholder?: string;
 	required?: boolean;
 }
@@ -40,7 +41,11 @@ const Form = ({ fields, onSubmit, onPrev }: FormProps) => {
 				/>
 			))}
 			<div className="onboarding-buttons">
-				{onPrev && <MainButton onClick={onPrev}>Back</MainButton>}
+				{onPrev && (
+					<MainButton type="button" onClick={onPrev}>
+						Back
+					</MainButton>
+				)}
 				<MainButton type="submit" disabled={!isValid}>
 					Next
 				</MainButton>

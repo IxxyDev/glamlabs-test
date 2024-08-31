@@ -6,6 +6,7 @@ interface FormField {
 	label: string;
 	placeholder?: string;
 	required?: boolean;
+	value: string;
 }
 
 interface UseFormProps {
@@ -14,9 +15,22 @@ interface UseFormProps {
 }
 
 const useForm = ({ fields, onSubmit }: UseFormProps) => {
-	const [formData, setFormData] = useState<Record<string, string>>({});
+	const initialFormData = fields.reduce(
+		(acc, field) => {
+			acc[field.name] = field.value || "";
+			return acc;
+		},
+		{} as Record<string, string>,
+	);
+
+	const [formData, setFormData] =
+		useState<Record<string, string>>(initialFormData);
 	const [errors, setErrors] = useState<Record<string, string>>({});
-	const [isValid, setIsValid] = useState<boolean>(false);
+	const [isValid, setIsValid] = useState(false);
+
+	useEffect(() => {
+		validate();
+	}, [formData]);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -24,31 +38,18 @@ const useForm = ({ fields, onSubmit }: UseFormProps) => {
 		setErrors({ ...errors, [name]: "" });
 	};
 
-	const validateEmail = (email: string): boolean => {
-		const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return emailPattern.test(email);
-	};
-
-	const validate = () => {
+	const validate = (): boolean => {
 		const newErrors: Record<string, string> = {};
 		fields.forEach((field) => {
 			if (field.required && !formData[field.name]) {
 				newErrors[field.name] = `${field.label} is required`;
-			} else if (
-				field.type === "email" &&
-				!validateEmail(formData[field.name] || "")
-			) {
-				newErrors[field.name] = "Invalid email format";
 			}
 		});
 		setErrors(newErrors);
-		setIsValid(Object.keys(newErrors).length === 0);
-		return Object.keys(newErrors).length === 0;
+		const formIsValid = Object.keys(newErrors).length === 0;
+		setIsValid(formIsValid);
+		return formIsValid;
 	};
-
-	useEffect(() => {
-		validate();
-	}, [formData]);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();

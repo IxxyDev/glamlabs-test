@@ -4,19 +4,22 @@ import Step2 from "./Step2/Step2.tsx";
 import Step3 from "./Step3/Step3.tsx";
 
 import { mockAuthService } from "../../auth/mockAuthSerivce.ts";
+import { analyticsService } from "../../services/analyticsService.ts";
 import Success from "./Success/Success.tsx";
 
-type UserCredentials = {
+type UserData = {
 	email: string;
-	password: string;
+	userId: string;
+	name: string;
+	phone: string;
+	cardNumber: string;
+	expiryDate: string;
+	cvv: string;
 };
 
 const Onboarding = () => {
 	const [step, setStep] = useState(1);
-	const [formData, setFormData] = useState<UserCredentials>({
-		email: "",
-		password: "",
-	});
+	const [formData, setFormData] = useState<UserData>({} as UserData);
 
 	const handleNext = () => setStep(step + 1);
 	const handlePrev = () => setStep(step - 1);
@@ -25,41 +28,59 @@ const Onboarding = () => {
 		setFormData({ ...formData, ...data });
 	};
 
-	const handleFinish = async () => {
-		const { email, password } = formData;
+	const handleOnboarding = async () => {
+		const { email, userId } = formData;
 		try {
-			const user = await mockAuthService.signUp(email, password);
-			console.log("User successfully onboarded:", user);
+			const user = await mockAuthService.signUp(email, userId);
+			setFormData({ ...formData, ...user });
+
+			analyticsService.trackOnboarding({
+				id: user.userId,
+				email: user.email,
+				hasPaid: false,
+			});
 			handleNext();
 		} catch (error) {
 			console.error("Error during onboarding:", error);
 		}
 	};
 
-	const handleFinalFinish = () => {
+	const handlePayment = () => {
+		const { userId } = formData;
+		analyticsService.trackPayment(userId);
+		handleNext();
+	};
+
+	const handleFinish = () => {
 		window.location.href = "/";
 	};
 
 	return (
 		<div className="onboarding-container">
 			{step === 1 && (
-				<Step1 onNext={handleNext} onFormDataChange={handleFormDataChange} />
+				<Step1
+					onNext={handleNext}
+					onFormDataChange={handleFormDataChange}
+					formData={formData}
+				/>
 			)}
 			{step === 2 && (
 				<Step2
-					onNext={handleNext}
+					onNext={handleOnboarding}
 					onPrev={handlePrev}
 					onFormDataChange={handleFormDataChange}
+					formData={formData}
 				/>
 			)}
 			{step === 3 && (
 				<Step3
 					onPrev={handlePrev}
-					onNext={handleFinish}
+					onNext={handlePayment}
 					onFormDataChange={handleFormDataChange}
+					formData={formData}
 				/>
 			)}
-			{step === 4 && <Success onFinish={handleFinalFinish} />}
+			{step === 4 && <Success onFinish={handleFinish} />}
 		</div>
 	);
 };

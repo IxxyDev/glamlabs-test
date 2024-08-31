@@ -4,12 +4,25 @@ interface Step2Props {
 	onNext: () => void;
 	onPrev: () => void;
 	onFormDataChange: (data: Record<string, string>) => void;
+	formData: Record<string, string>;
 }
 
-const Step2 = ({ onNext, onPrev, onFormDataChange }: Step2Props) => {
+const Step2 = ({ onNext, onPrev, onFormDataChange, formData }: Step2Props) => {
 	const fields = [
-		{ name: "name", type: "text", label: "Name:", required: true },
-		{ name: "phone", type: "tel", label: "Phone:" },
+		{
+			name: "name",
+			type: "text",
+			label: "Name:",
+			required: true,
+			value: formData.name,
+		},
+		{
+			name: "phone",
+			type: "tel",
+			label: "Phone:",
+			required: true,
+			value: formData.phone,
+		},
 	];
 
 	const handleSubmit = (data: Record<string, string>) => {

@@ -34,6 +34,8 @@
 	cursor: pointer;
 	padding: 15px;
 	z-index: 1;
+	width: 50px;
+	line-height: 1;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 	transition: background-color 0.3s, transform 0.3s;
 }
@@ -72,6 +74,11 @@
 
 .carousel-control.prev::after {
 	content: '◄';
+	position: relative;
+	top: 0;
+	left: -3px;
+	width: 18px;
+	height: 18px;
 }
 
 .carousel-control.next::after {
@@ -80,5 +87,35 @@
 
 .cta {
 	margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+	.carousel-control.prev {
+		left: -60px;
+	}
+
+	.carousel-control.next {
+		right: -60px;
+	}
+
+	.video-carousel {
+		max-width: 240px;
+	}
+
+	.carousel-control {
+		font-size: 15px;
+		padding: 10px;
+		width: 35px;
+		height: 35px;
+	}
+
+	.carousel-control.prev::after {
+		left: -1px;
+	}
+
+	.landing-video {
+		width: 240px;
+		height: 524px;
+	}
 }
 
